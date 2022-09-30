@@ -1,14 +1,16 @@
 window.onload = load;
-
-const mailformat = /(.+)@(.+).(.+)/;
+//  /\/[a-z]{1,}[[a-z]{1,}\|[a-z]{1,}(\|[a-z]{1,})*]/
+const mailformat = /[a-z]/;
 
 function load(){
 
-    var form = document.querySelector('#login-form');
-    form.addEventListener('submit', (event) => {
+    var form = document.querySelector('#button');
+    form.addEventListener('click', (event) => {
         console.log('submit click')
         if(formIsValid()){
-            form.submit();
+            var email = document.getElementById("email").value
+            sessionStorage.setItem('email', email)
+            window.location.href = "menu.html"
         } else{
             event.preventDefault();
         }
@@ -25,8 +27,7 @@ function formIsValid(){
     var email = document.getElementById("email");
     var isValid = false;
     if(mailformat.exec(email.value)){
-        isValid = true
-        window.location.href = "menu.html";
+        isValid = true;
     }
     else{
         setError(email, 'Email Inválido!')
