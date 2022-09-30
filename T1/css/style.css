@@ -4,12 +4,49 @@
     box-sizing: border-box;
 }
 
-body {
+#body {
     display:flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background-color: chocolate;
+}
+
+#bodyMenu{
+    align-items: center;
+    justify-content: center;
+    min-height: 95vh;
+    min-width: 100vh;
+    padding: 25px;
+    background-color: #fff;
+}
+
+#header {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    min-height: 5vh;
+    min-width: 100vh;
+    background-color: chocolate;
+}
+
+.titleHeader{
+    color: #fff;
+}
+
+.exit{
+    color: #fff;
+    background-color: transparent;
+    border-color: transparent;
+    cursor: pointer;
+}
+
+.email{
+    font-size: 22px;
+    font-weight: bold;
+    color: chocolate;
 }
 
 #login-form {
@@ -61,4 +98,14 @@ body {
      background-color: chocolate;
      color:#fff;
      border:none;
+ }
+
+ #btnMenu{
+    width: 20%;
+    padding: 10px;
+    font-size: 20px;
+    background-color: chocolate;
+    color: #fff;
+    border: none;
+    margin-top: 20px;
  }

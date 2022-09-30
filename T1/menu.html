@@ -9,18 +9,32 @@
     <script src='javascript/menu.js'></script>
 </head>
 <body>
-    <div>
-        Olá 
-
-        Selecione o nível de dificuldade do jogo
+    <div id="header">
+        <h1 class="titleHeader">Nome do jogo</h1>
+        <div>
+            <button id="exit" class="exit">Sair</button>
+        </div>
     </div>
-    <div>
-        <input type="radio" id="facil" name="fav_language" value="facil">
-        <label for="html">Fácil</label><br>
-        <input type="radio" id="normal" name="fav_language" value="normal">
-        <label for="Normal">Normal</label><br>
-        <input type="radio" id="dificil" name="fav_language" value="dificil">
-        <label for="dificil">Dificíl</label>
+
+    <div id="bodyMenu">
+
+        <div>
+            <span>Olá 
+                <span id="email" class="email"></span> 
+                Selecione o nível de dificuldade do jogo</span>
+
+        </div>
+        <div>
+            <input type="radio" id="facil" name="difficulty" value="0" checked="true">
+            <label for="html">Fácil</label><br>
+            <input type="radio" id="normal" name="difficulty" value="1">
+            <label for="Normal">Normal</label><br>
+            <input type="radio" id="dificil" name="difficulty" value="2">
+            <label for="dificil">Dificíl</label>
+        </div>
+
+        <button type="submit" id="btnMenu">Começar</button>
+
     </div>
 
 </body>
