@@ -15,8 +15,8 @@ function load(){
         console.log('Start Click')
         var difficulty = document.querySelector('input[name="difficulty"]:checked').value;
         console.log(difficulty)
-
         sessionStorage.setItem('difficulty', difficulty)
+        window.location.href = "game.html"
     })
 
     var name = document.getElementById("email");
