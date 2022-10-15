@@ -8,14 +8,19 @@
     <link rel='stylesheet' type='text/css' media='screen' href='css/style.css'>
     <script src='javascript/game.js'></script>
 </head>
-<body>
-    
-    <div id="header">
-        <h1 class="titleHeader">Nome do jogo</h1>
-        <div>
-            <button id="exit" class="exit">Sair</button>
+<body id="body">
+    <div class="wrapper">
+        <div class="stats-container">
+            <div id="moves-count"></div>
+            <div id="time"></div>
         </div>
+        <div class="game-container"></div>
+        <button id="stop" class="hide">Stop Game</button>
     </div>
-    
+    <div id="controls" class="controls-container">
+        <p id="result"></p>
+        <button id="start">Iniciar o jogo</button>
+        <button id="exitGame">Sair do jogo</button>
+    </div>
 </body>
 </html>

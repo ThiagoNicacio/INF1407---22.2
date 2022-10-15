@@ -1,8 +1,7 @@
-window.onload = load;
 //  /\/[a-z]{1,}[[a-z]{1,}\|[a-z]{1,}(\|[a-z]{1,})*]/
 const mailformat = /[a-z]/;
 
-function load(){
+window.onload = function (){
 
     var form = document.querySelector('#button');
     form.addEventListener('click', (event) => {
