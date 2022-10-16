@@ -17,6 +17,11 @@ let movesCount = 0,
     seconds = 0,
     minutes = 0;
 
+var difficulty = undefined;
+
+var maxMinutes = undefined,
+    maxMoves = undefined;
+
 const items = [
     { name: "batman", image: "src/batman.png" },
     { name: "capitao", image: "src/capitao-america.png" },
@@ -33,6 +38,22 @@ const items = [
 ];
 
 window.onload = function (){
+    difficulty = sessionStorage.getItem("difficulty");
+    switch(difficulty){
+        case "0": 
+            maxMinutes = undefined;
+            maxMoves = undefined;
+            break;
+        case "1":
+            maxMinutes = 3;
+            maxMoves = undefined; 
+            break;
+        case "2": 
+            maxMinutes = 1;
+            maxMoves = 20;
+    }
+
+    console.log(maxMinutes, maxMoves);
     exitGameButton = document.getElementById("exitGame");
     startButton = document.getElementById("start");
     stopButton = document.getElementById("stop");
@@ -44,7 +65,6 @@ window.onload = function (){
 
     exitGameButton.addEventListener('click', () => {
         console.log('exit click');
-        sessionStorage.clear();
         window.location.replace("menu.html");
     });
 
@@ -89,10 +109,19 @@ function stopGame(){
     clearInterval(interval);
 }
 
+function loseGame(nCause){
+    result.innerHTML = ""
+    var youLose = document.createElement('h2');
+    youLose.appendChild(document.createTextNode('Você perdeu'));
+    result.appendChild(youLose);
+    var cause = document.createElement('h2');
+    cause.appendChild(document.createTextNode(nCause));
+    result.appendChild(cause);
+}
+
 function movesCounter () {
     movesCount += 1;
-    moves.innerHTML = "";
-    moves.appendChild(document.createTextNode(`Jogadas: ${movesCount}`));
+    setMoves()
 };
 
 function setMoves(){
@@ -107,6 +136,12 @@ const timeGenerator = () => {
       seconds = 0;
     }
     setTimer();
+
+    if(minutes == maxMinutes){
+        console.log('Tempo máximo alcançado')
+        loseGame('Tempo máximo alcançado')
+        stopGame();
+    }
 };
 
 function getTimeValue(){
@@ -176,7 +211,7 @@ const matrixGenerator = (cardValues, size = 4) => {
                     firstCard = card;
                     firstCardValue = card.getAttribute("data-card-value");
                 } else {
-                    movesCounter();
+                    
                     secondCard = card;
                     let secondCardValue = card.getAttribute("data-card-value");
                     if (firstCardValue == secondCardValue) {
@@ -192,7 +227,7 @@ const matrixGenerator = (cardValues, size = 4) => {
                             result.appendChild(yourWin);
 
                             var moves = document.createElement('h2');
-                            moves.appendChild(document.createTextNode('Com ' + movesCount + ' jogadas'))
+                            moves.appendChild(document.createTextNode('Com ' + movesCount + 'jogadas'))
                             result.appendChild(moves);
 
                             var time = document.createElement('h2');
@@ -205,10 +240,16 @@ const matrixGenerator = (cardValues, size = 4) => {
                         let [tempFirst, tempSecond] = [firstCard, secondCard];
                         firstCard = false;
                         secondCard = false;
-                        let delay = setTimeout(() => {
+                        setTimeout(() => {
                         tempFirst.classList.remove("flipped");
                         tempSecond.classList.remove("flipped");
                         }, 1000);
+                    }
+                    movesCounter();
+                    if(maxMoves == movesCount){
+                        console.log('Máximo de movimentos alcançados');
+                        loseGame('Máximo de movimentos alcançados');
+                        stopGame();
                     }
                 }
             }
