@@ -57,3 +57,4 @@ Caso você perca o jogo, nos níveis normal e difícil, será exibido o motivo p
 - Durante o jogo, caso o usuário clique em várias peças simultaneamente as vezes pode ocorrer um bug de comparação das peças. 
 Não consegui corrigir o problema pois não é sempre que ele ocorre. 
 
+- Na tela de menu, ao clicar em sair, a navegação as vezes permite que você volte para a tela de menu sem um login realizado. Isso está ocorrendo quando vai e volta da tela do jogo. 
