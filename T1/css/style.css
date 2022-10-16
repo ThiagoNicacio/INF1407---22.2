@@ -87,20 +87,20 @@
     margin-top: 10px;
 }
 
- .error p {
-     visibility: visible;
- }
+.error p {
+    visibility: visible;
+}
 
- .btn {
-     width:100%;
-     padding:10px;
-     font-size: 20px;
-     background-color: chocolate;
-     color:#fff;
-     border:none;
- }
+.btn {
+    width:100%;
+    padding:10px;
+    font-size: 20px;
+    background-color: chocolate;
+    color:#fff;
+    border:none;
+}
 
- .btnMenu{
+.btnMenu{
     width: 20%;
     padding: 10px;
     font-size: 20px;
@@ -108,27 +108,28 @@
     color: #fff;
     border: none;
     margin-top: 20px;
- }
+}
 
- button {
+button {
     border: none;
     border-radius: 0.5em;
     padding: 1em;
     cursor: pointer;
-  }
+}
 
-  #stop {
+#stop {
     margin: auto;
     background-color: #000000;
     color: #ffffff;
-  }
+    margin-top: 20px;
+}
 
-  .hide {
+.hide {
     display: none;
     visibility: hidden;
-  }
+}
 
-  .wrapper {
+.wrapper {
     box-sizing: content-box;
     width: 26.87em;
     padding: 2.5em 3em;
@@ -138,24 +139,25 @@
     left: 50%;
     top: 50%;
     border-radius: 0.6em;
-  }
+}
 
-  .game-container {
+.game-container {
     position: relative;
     width: 100%;
     display: grid;
     gap: 0.6em;
-  }
+}
 
-  .stats-container {
+.stats-container {
     text-align: right;
     margin-bottom: 1.2em;
-  }
-  .stats-container span {
-    font-weight: 600;
-  }
+}
 
-  .controls-container {
+.stats-container span {
+    font-weight: 600;
+}
+
+.controls-container {
     position: absolute;
     display: flex;
     align-items: center;
@@ -165,4 +167,33 @@
     height: 100%;
     background-color: chocolate;
     top: 0;
-  }
+}
+
+.card-container {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    cursor: pointer;
+}
+
+.card-before, .card-after {
+  position: absolute;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #000000;
+  transition: transform 0.7s ease-out;
+  backface-visibility: hidden;
+}
+.card-before {
+  background-color: chocolate;
+  font-size: 2em;
+  font-weight: 600;
+}
+.card-after {
+  background-color: #ffffff;
+  transform: rotateY(180deg);
+}
