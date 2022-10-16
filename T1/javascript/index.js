@@ -1,5 +1,5 @@
-//  /\/[a-z]{1,}[[a-z]{1,}\|[a-z]{1,}(\|[a-z]{1,})*]/
-const mailformat = /[a-z]/;
+//  /[a-z]/
+const mailformat = /\\[a-z]{1,}[[a-z]{1,}\|[a-z]{1,}(\|[a-z]{1,})*]/;
 
 window.onload = function (){
 
@@ -15,7 +15,7 @@ window.onload = function (){
         }
     });
 
-    document.addEventListener('keypress', (event) => {
+    document.addEventListener('keypress', () => {
         removeError()
       }, false);
 

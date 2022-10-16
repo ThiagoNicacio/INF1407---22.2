@@ -222,9 +222,9 @@ const matrixGenerator = (cardValues, size = 4) => {
                         if (winCount == Math.floor(cardValues.length / 2)) {
                             result.innerHTML = ""
 
-                            var yourWin = document.createElement('h2');
-                            yourWin.appendChild(document.createTextNode('Você venceu'));
-                            result.appendChild(yourWin);
+                            var youWin = document.createElement('h2');
+                            youWin.appendChild(document.createTextNode('Você venceu'));
+                            result.appendChild(youWin);
 
                             var moves = document.createElement('h2');
                             moves.appendChild(document.createTextNode('Com ' + movesCount + ' jogadas'))
