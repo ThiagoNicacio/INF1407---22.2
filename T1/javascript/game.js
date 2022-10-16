@@ -227,7 +227,7 @@ const matrixGenerator = (cardValues, size = 4) => {
                             result.appendChild(yourWin);
 
                             var moves = document.createElement('h2');
-                            moves.appendChild(document.createTextNode('Com ' + movesCount + 'jogadas'))
+                            moves.appendChild(document.createTextNode('Com ' + movesCount + ' jogadas'))
                             result.appendChild(moves);
 
                             var time = document.createElement('h2');

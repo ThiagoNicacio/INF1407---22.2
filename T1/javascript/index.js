@@ -7,7 +7,7 @@ window.onload = function (){
     form.addEventListener('click', (event) => {
         console.log('submit click')
         if(formIsValid()){
-            var email = document.getElementById("email").value
+            var email = document.getElementById("emailInput").value
             sessionStorage.setItem('email', email)
             window.location.href = "menu.html"
         } else{
@@ -23,7 +23,7 @@ window.onload = function (){
 }
 
 function formIsValid(){
-    var email = document.getElementById("email");
+    var email = document.getElementById("emailInput");
     var isValid = false;
     if(mailformat.exec(email.value)){
         isValid = true;
@@ -42,7 +42,7 @@ function setError(element, errorMessage) {
 }
 
 function removeError(){
-    var email = document.getElementById("email");
+    var email = document.getElementById("emailInput");
     const parent = email.parentElement;
     parent.classList.remove('error');
     const paragraph = parent.querySelector('p');

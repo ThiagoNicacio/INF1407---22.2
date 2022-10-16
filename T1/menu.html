@@ -8,34 +8,27 @@
     <link rel='stylesheet' type='text/css' media='screen' href='css/style.css'>
     <script src='javascript/menu.js'></script>
 </head>
-<body>
-    <div id="header">
-        <h1 class="titleHeader">Nome do jogo</h1>
-        <div>
-            <button id="exit" class="exit">Sair</button>
-        </div>
-    </div>
+<body id="body">
 
-    <div id="bodyMenu">
-
+    <div class="wrapper">
         <div>
             <span>Olá 
                 <span id="email" class="email"></span> 
                 Selecione o nível de dificuldade do jogo</span>
-
         </div>
         <div>
-            <input type="radio" id="facil" name="difficulty" value="0" checked="true">
+            <input onchange="getValue(this)" type="radio" id="facil" name="difficulty" value="0" checked="true">
             <label for="html">Fácil</label><br>
-            <input type="radio" id="normal" name="difficulty" value="1">
+            <input onchange="getValue(this)" type="radio" id="normal" name="difficulty" value="1">
             <label for="Normal">Normal</label><br>
-            <input type="radio" id="dificil" name="difficulty" value="2">
+            <input onchange="getValue(this)" type="radio" id="dificil" name="difficulty" value="2">
             <label for="dificil">Dificíl</label>
         </div>
-
-        <button type="submit" id="btnMenu" class="btnMenu">Começar</button>
-
-    </div>
-
+        <div class="container-description-button">
+            <span id="description" class="description"/></span>
+            <button class="btn" id="start">Começar</button>
+            <button class="btnExit" id="exit" >Sair</button>
+        </div>
+      </div>
 </body>
 </html>
