@@ -176,7 +176,9 @@ const matrixGenerator = (cardValues, size = 4) => {
       
         var cardBefore = document.createElement('div');
         cardBefore.classList.add('card-before');
-        cardBefore.appendChild(document.createTextNode('X'))
+        var imgX = document.createElement('img');
+        imgX.src = 'src/x.png';
+        cardBefore.appendChild(imgX);
         //console.log('cardBefore   ', cardBefore);
 
         var img = document.createElement('img');
