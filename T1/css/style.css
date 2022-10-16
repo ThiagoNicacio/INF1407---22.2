@@ -1,4 +1,4 @@
-* {
+*{
     padding:0;
     margin:0;
     box-sizing: border-box;
@@ -113,7 +113,7 @@
 button {
     border: none;
     border-radius: 0.5em;
-    padding: 1em;
+    padding: 2em;
     cursor: pointer;
 }
 
@@ -177,23 +177,46 @@ button {
 }
 
 .card-before, .card-after {
-  position: absolute;
-  border-radius: 5px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 3px solid #000000;
-  transition: transform 0.7s ease-out;
-  backface-visibility: hidden;
+    position: absolute;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #000000;
+    transition: transform 0.7s ease-out;
+    backface-visibility: hidden;
 }
 .card-before {
-  background-color: chocolate;
-  font-size: 2em;
-  font-weight: 600;
+    background-color: chocolate;
+    font-size: 2em;
+    font-weight: 600;
 }
 .card-after {
-  background-color: #ffffff;
-  transform: rotateY(180deg);
+    background-color: #ffffff;
+    transform: rotateY(180deg);
+    width: 100%;
+    height: 100%;
 }
+
+.card-container.flipped .card-before {
+    transform: rotateY(180deg);
+}
+.card-container.flipped .card-after {
+    transform: rotateY(0deg);
+}
+
+img{
+    max-width: 85%;
+    max-height: auto;
+}
+
+#result {
+    text-align: center;
+}
+#result h2 {
+    font-size: 2.5em;
+    color: #fff;
+}
+  

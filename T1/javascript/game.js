@@ -1,9 +1,21 @@
-var startButton = undefined
-var stopButton = undefined
-var controls = undefined
-var gameContainer = undefined
+var startButton = undefined;
+var stopButton = undefined;
+var controls = undefined;
+var gameContainer = undefined;
+var exitGameButton = undefined;
+var moves = undefined;
+var timeValue = undefined;
+var result = undefined;
+let interval;
 
 let cards; 
+let firstCard = false;
+let secondCard = false;
+
+let movesCount = 0,
+    winCount = 0,
+    seconds = 0,
+    minutes = 0;
 
 const items = [
     { name: "batman", image: "src/batman.png" },
@@ -18,14 +30,17 @@ const items = [
     { name: "mulher-maravilha", image: "src/mulher-maravilha.png" },
     { name: "pantera", image: "src/pantera-negra.png" },
     { name: "thor", image: "src/thor.png" },
-  ];
+];
 
 window.onload = function (){
-    var exitGameButton = document.getElementById("exitGame");
+    exitGameButton = document.getElementById("exitGame");
     startButton = document.getElementById("start");
     stopButton = document.getElementById("stop");
     controls = document.getElementById("controls");
     gameContainer = document.querySelector(".game-container");
+    moves = document.getElementById("moves-count");
+    timeValue = document.getElementById("time");
+    result = document.getElementById("result");
 
     exitGameButton.addEventListener('click', () => {
         console.log('exit click');
@@ -33,34 +48,76 @@ window.onload = function (){
         window.location.replace("menu.html");
     });
 
-    
     startButton.addEventListener("click", () => {
         console.log('start click');
-        
         stopButton.classList.remove("hide");
         controls.classList.add("hide");
         startButton.classList.add("hide");
         exitGameButton.classList.add("hide");
-
-        startGame()
+        startGame();
     });
     
     stopButton.addEventListener('click', () => {
         console.log('stop click');
-
-        stopButton.classList.add("hide");
-        controls.classList.remove("hide");
-        startButton.classList.remove("hide");
-        exitGameButton.classList.remove("hide");
+        stopGame();
     })
 }
 
 function startGame(){
     console.log('game start');
+    result.innerText = "";
+
+    movesCount = 0;
+    seconds = 0;
+    minutes = 0;
+    winCount = 0;
 
     let cardValues = generateRandomArrayCards();
     console.log(cardValues);
     matrixGenerator(cardValues);
+    interval = setInterval(timeGenerator, 1000);
+    setTimer();
+    setMoves();
+}
+
+function stopGame(){
+    gameContainer.innerHTML = "";
+    stopButton.classList.add("hide");
+    controls.classList.remove("hide");
+    startButton.classList.remove("hide");
+    exitGameButton.classList.remove("hide");
+    clearInterval(interval);
+}
+
+function movesCounter () {
+    movesCount += 1;
+    moves.innerHTML = "";
+    moves.appendChild(document.createTextNode(`Jogadas: ${movesCount}`));
+};
+
+function setMoves(){
+    moves.innerHTML = "";
+    moves.appendChild(document.createTextNode(`Jogadas: ${movesCount}`));
+}
+
+const timeGenerator = () => {
+    seconds += 1;
+    if (seconds >= 60) {
+      minutes += 1;
+      seconds = 0;
+    }
+    setTimer();
+};
+
+function getTimeValue(){
+    let secondsValue = seconds < 10 ? `0${seconds}` : seconds;
+    let minutesValue = minutes < 10 ? `0${minutes}` : minutes;
+    return `Tempo: ${minutesValue}:${secondsValue}`
+}
+
+function setTimer(){
+    timeValue.innerHTML = "";
+    timeValue.appendChild(document.createTextNode(getTimeValue()));
 }
 
 const generateRandomArrayCards = (size = 4) => {
@@ -79,7 +136,6 @@ const generateRandomArrayCards = (size = 4) => {
 const matrixGenerator = (cardValues, size = 4) => {
     gameContainer.innerHTML = "";
     cardValues = [...cardValues, ...cardValues];
-    //simple shuffle
     cardValues.sort(() => Math.random() - 0.5);
     for (let i = 0; i < size * size; i++) {
       
@@ -106,9 +162,56 @@ const matrixGenerator = (cardValues, size = 4) => {
         //console.log('cardContainer   ', cardContainer);
 
         gameContainer.appendChild(cardContainer);
-        
     }
     
     gameContainer.style.gridTemplateColumns = `repeat(${size},auto)`;
 
+    cards = document.querySelectorAll(".card-container");
+    cards.forEach((card) => {
+        card.addEventListener("click", () => {
+            if (!card.classList.contains("matched")) {
+                card.classList.add("flipped");
+
+                if (!firstCard) {
+                    firstCard = card;
+                    firstCardValue = card.getAttribute("data-card-value");
+                } else {
+                    movesCounter();
+                    secondCard = card;
+                    let secondCardValue = card.getAttribute("data-card-value");
+                    if (firstCardValue == secondCardValue) {
+                        firstCard.classList.add("matched");
+                        secondCard.classList.add("matched");
+                        firstCard = false;
+                        winCount += 1;
+                        if (winCount == Math.floor(cardValues.length / 2)) {
+                            result.innerHTML = ""
+
+                            var yourWin = document.createElement('h2');
+                            yourWin.appendChild(document.createTextNode('Você venceu'));
+                            result.appendChild(yourWin);
+
+                            var moves = document.createElement('h2');
+                            moves.appendChild(document.createTextNode('Com ' + movesCount + ' jogadas'))
+                            result.appendChild(moves);
+
+                            var time = document.createElement('h2');
+                            time.appendChild(document.createTextNode(getTimeValue()))
+                            result.appendChild(time);
+
+                            stopGame();
+                        }
+                    } else {
+                        let [tempFirst, tempSecond] = [firstCard, secondCard];
+                        firstCard = false;
+                        secondCard = false;
+                        let delay = setTimeout(() => {
+                        tempFirst.classList.remove("flipped");
+                        tempSecond.classList.remove("flipped");
+                        }, 1000);
+                    }
+                }
+            }
+        });
+    });
 }
