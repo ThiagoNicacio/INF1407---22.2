@@ -6,6 +6,45 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from .models import *
 from .serializer import *
+from .forms import *
+from django.shortcuts import render, redirect
+from django.views.generic.base import View
+
+class ListAllNews(View):
+    def get(self, request, *args, **kwargs):
+        news = News.objects.all()
+        context = {'news': news, }
+        return render(
+            request,
+            'Blog/listNews.html', context)
+
+def index(request):
+    return render(request, 'Blog/index.html')
+
+def home(request):
+    return render(request, 'Blog/home.html') 
+
+def register_new_account(request):
+    if (request.method == 'POST'):
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+        else:
+            context = {
+                'form': form
+            }
+            return render(request, 'Blog/register.html', context)
+    else:
+        form = CustomUserCreationForm()
+    
+        context = {
+            'form': form
+        }
+        return render(request, 'Blog/register.html', context)
+
+
+######################################### VIEWS para serem utilizadas externamentes #########################################
 
 class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):

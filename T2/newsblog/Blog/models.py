@@ -1,11 +1,6 @@
 from django.db import models
-from urllib import request
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.utils import timezone
-from django.dispatch import receiver
-from django.db.models.signals import post_save
-from django.conf import settings
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
