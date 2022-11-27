@@ -14,9 +14,11 @@
 <div class="row" style="justify-content: center">
   <h1>Lista de notícias</h1>
 </div>
-<div>
+<!-- <div> -->
+  <ul class="list-group">
+
   {% for nw in news %}
-    <div>
+    <!-- <div>
       <span>{{nw.title}}</span>
       <span>{{nw.message}}</span>
       <span>{{nw.user.name}}</span>
@@ -26,11 +28,27 @@
         <a href="{% url 'deleteNews' pk=nw.id %}">Deletar</a> 
       </span>
       <br/>
-    </div>
+    </div> -->
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <!-- <a class="text-decoration-none" href="/link3">Link 3</a>
+       <a href="/trash3" class="btn btn-sm btn-danger">x</a> -->
+       <div class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{nw.title}}</h5>
+          <small class="text-muted"></small>
+         </div>
+        <p class="mb-1">{{nw.message}}</p>
+        <small class="text-muted">Autor: {{nw.user.name}}, Data: {{nw.created_at}}</small>
+        </div>  
+      <a href="{% url 'updateNews' pk=nw.id %}" class="btn btn-sm btn-primary">Atualizar</a>
+      <a href="{% url 'deleteNews' pk=nw.id %}" class="btn btn-sm btn-danger">Deletar</a>
+     </li>
+
+  </ul>
   {% empty %}
     <h3 colspan="5">Nenhuma notícia postada</h3>
   {% endfor %}
 
-</div>
+<!-- </div> -->
 </body>
 </html>

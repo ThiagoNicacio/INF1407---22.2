@@ -1,4 +1,15 @@
 {% extends 'Blog/index.html' %}
+
+{# Load the tag library #}
+{% load bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -6,10 +17,16 @@
 
 {% block content %}
 <div class="row" style="justify-content: center">
+    <h5>Entre sua conta</h5>
+  </div>
+<div class="row" style="justify-content: center">
+    {% bootstrap_messages %}
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Entrar">
+        {% bootstrap_form form %}
+        <!-- {{ form.as_p }} -->
+        {% bootstrap_button "Entrar" %}
+        <!-- <input type="submit" value="Entrar"> -->
     </form>
 </div>
 {% endblock content %}

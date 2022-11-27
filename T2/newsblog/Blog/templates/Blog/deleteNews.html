@@ -1,22 +1,43 @@
-<!DOCTYPE html>
-<html>
+{% extends 'Blog/index.html' %}
+
+{# Load the tag library #}
+{% load bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
 
 <head>
-  <meta charset="UTF-8">
-  <title>Deletar Notícia</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
-<body>
-  {% include 'Blog/links.html' %}
-  <h1>Deletar Notícia</h1>
-  <form method="POST">
+{% block content %}
+<div class="row" style="justify-content: center">
+    <h5>Confirmar deleção da noticia: {{news.title}}?</h5>
+  </div>
+<div class="row" style="justify-content: center">
+    {% bootstrap_messages %}
+    <form method="post">
+        {% csrf_token %}
+        <!-- {% bootstrap_button "Entrar" %} -->
+        <!-- <input type="submit" value="Entrar"> -->
+        <button type="submit" class="btn btn-primary">Confirmar</button>
+        <button type="button" class="btn btn-secondary">
+          <a href="{% url 'home' %}" style="text-decoration: none; color: black;">Cancelar</a>
+        </button>
+    </form>
+</div>
+{% endblock content %}
+
+  <!-- <form method="POST">
     {% csrf_token %}
     Confirma a remoção de {{ news.title }}?<br>
-    <button>
+    <button type="submit" class="btn btn-primary">Confirmar</button>
+    <button type="button" class="btn btn-secondary">
       <a href="{% url 'home' %}" style="text-decoration: none; color: black;">Cancelar</a>
     </button>
-    <input type="submit" value="Remove">
-  </form>
-</body>
-
-</html>
+  </form> -->
