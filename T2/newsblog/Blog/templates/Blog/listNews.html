@@ -12,7 +12,10 @@
   {% include 'Blog/links.html' %}
   
 <div class="row" style="justify-content: center">
-  <h1>Lista de notícias</h1>
+    <h1>Lista de notícias</h1>
+</div>
+<div class="row" style="justify-content: center">
+  <h6 id="totalHeader"></h6>
 </div>
 <div>
   {% for nw in news %}
@@ -20,14 +23,35 @@
       <span>{{nw.title}}</span>
       <span>{{nw.message}}</span>
       <span>{{nw.user.name}}</span>
-      <span><a href="{% url 'updateNews' pk=nw.id %}">Atualizar</a> | 
-        
+      <span>
+        <a href="{% url 'updateNews' pk=nw.id %}">Atualizar</a> 
+        | 
+        <a href="{% url 'deleteNews' pk=nw.id %}">Deletar</a>
       </span>
       <br/>
     </div>
   {% empty %}
     <h3 colspan="5">Nenhuma notícia postada</h3>
   {% endfor %}
+
+  {% block javascript %}
+
+<script type="text/javascript">
+  onload = function () {
+
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.open("GET", "/newsCount", true);
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.status == 200 && xmlhttp.readyState == 4) {
+        var resposta = JSON.parse(xmlhttp.responseText);
+        document.getElementById('totalHeader').innerText = "Total de notícias: " + resposta.totalNumberOfNews
+      }
+    };
+    xmlhttp.send(null);
+  }
+</script>
+{% endblock %}
 
 </div>
 </body>

@@ -13,3 +13,11 @@
 .formulario th {
     text-align: right; vertical-align: text-top;
 }
+
+.no-margin h1, .no-margin h3 {
+    margin 0;
+}
+
+.no-margin h3 {
+    margin: -0.75em;
+}

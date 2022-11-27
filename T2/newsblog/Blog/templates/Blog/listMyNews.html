@@ -20,8 +20,10 @@
       <span>{{nw.title}}</span>
       <span>{{nw.message}}</span>
       <span>{{nw.user.name}}</span>
-      <span><a href="{% url 'updateNews' pk=nw.id %}">Atualizar</a> | 
-        
+      <span>
+        <a href="{% url 'updateNews' pk=nw.id %}">Atualizar</a> 
+        | 
+        <a href="{% url 'deleteNews' pk=nw.id %}">Deletar</a> 
       </span>
       <br/>
     </div>

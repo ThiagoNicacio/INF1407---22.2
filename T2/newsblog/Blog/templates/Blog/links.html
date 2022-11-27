@@ -11,14 +11,20 @@
     <a href="{% url 'home' %}" class="header-option">
         Homepage
     </a> |
+    {% if user.is_authenticated %}
     <a href="{% url 'myNews' %}" class="header-option">
         Minhas notícias
     </a> |
-    <a href="{% url 'home' %}" class="header-option">
+    <a href="{% url 'createNews' %}" class="header-option">
         Criar notícia
     </a> |
     <a href="{% url 'logout' %}" class="header-option">
         Sair da conta
     </a>
+    {% else %}
+    <a href="{% url 'login' %}" class="header-option">
+        Fazer login
+    </a>
+    {% endif %}
 </div>
 <hr>

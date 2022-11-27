@@ -11,6 +11,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.base import View
 from django.http.response import HttpResponseRedirect
 from django.urls.base import reverse_lazy
+from django.http import JsonResponse
+
+def newsCount(request):
+    response = {
+        'totalNumberOfNews' : len(News.objects.all())
+    }
+    return JsonResponse(response)
 
 class ListAllNews(View):
     def get(self, request, *args, **kwargs):
@@ -60,6 +67,37 @@ class NewsUpdate(View):
         else:
             context = {'news': formulario, }
             return render(request, 'Blog/updateNews.html', context)
+
+class CreateNews(View):
+    def get(self, request, *args, **kwargs):
+        context = {'formulario': NewsModel2Form, }
+        return render(request,
+                      'Blog/createNews.html', context)
+
+    def post(self, request, *args, **kwargs):
+        formulario = NewsModel2Form(request.POST)
+        if formulario.is_valid():
+            news = formulario.save(commit=False)
+            news.user = request.user
+            news.save()
+            return HttpResponseRedirect(reverse_lazy('home'))
+        else:
+            context = {'news': formulario, }
+            return render(request, 'Blog/createNews.html', context)
+
+class DeleteNews(View):
+    def get(self, request, pk, *args, **kwargs):
+        news = News.objects.get(pk=pk)
+        if news.user != request.user: 
+            return render(request, 'Blog/notPermission.html')
+        context = {'news': news, }
+        return render(request, 'Blog/deleteNews.html',context)
+
+    def post(self, request, pk, *args, **kwargs):
+        news = News.objects.get(pk=pk)
+        news.delete()
+        return HttpResponseRedirect(
+            reverse_lazy('home'))
 
 
 def index(request):

@@ -26,4 +26,7 @@ urlpatternsSite = [
     path('home/', ListAllNews.as_view(), name='home'), 
     path('myNews/', ListMyNews.as_view(), name='myNews'),
     path('updateNews/<int:pk>', NewsUpdate.as_view(), name='updateNews'),
+    path('createNews/', CreateNews.as_view(), name='createNews'),
+    path('deleteNews/<int:pk>/', DeleteNews.as_view(), name='deleteNews'),
+    path('newsCount', newsCount, name='newsCount')
 ]

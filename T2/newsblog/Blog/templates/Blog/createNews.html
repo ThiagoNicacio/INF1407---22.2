@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Criar Notícia</title>
+</head>
+
+<body>
+{% include 'Blog/links.html' %}
+  <h1>Criação de notícia</h1>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <table class='formulario'>
+      {{ formulario.as_table}}
+    </table>
+    <button type="submit">Cria notícia</button>
+  </form>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Deletar Notícia</title>
+</head>
+
+<body>
+  {% include 'Blog/links.html' %}
+  <h1>Deletar Notícia</h1>
+  <form method="POST">
+    {% csrf_token %}
+    Confirma a remoção de {{ news.title }}?<br>
+    <button>
+      <a href="{% url 'home' %}" style="text-decoration: none; color: black;">Cancelar</a>
+    </button>
+    <input type="submit" value="Remove">
+  </form>
+</body>
+
+</html>
