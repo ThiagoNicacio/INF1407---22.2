@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Atualiza Notícia</title>
+</head>
+
+<body>
+  <h1>Atualização de notícia</h1>
+  <form method="POST" class='formulario'>
+    {% csrf_token %}
+    <table>
+      {{ news.as_table }}
+      <tr>
+        <td></td>
+        <td><input type="submit" value="Atualiza"></td>
+      </tr>
+    </table>
+  </form>
+</body>
+
+</html>

@@ -7,16 +7,60 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from .models import *
 from .serializer import *
 from .forms import *
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.base import View
+from django.http.response import HttpResponseRedirect
+from django.urls.base import reverse_lazy
 
 class ListAllNews(View):
     def get(self, request, *args, **kwargs):
         news = News.objects.all()
-        context = {'news': news, }
-        return render(
-            request,
-            'Blog/listNews.html', context)
+        news_serializer_array = NewsSerializer(news, many=True).data
+        for news_serializer in news_serializer_array: 
+            if 'user' in news_serializer and news_serializer['user'] != None: 
+                try: 
+                    user = User.objects.get(pk=news_serializer['user'])
+                    news_serializer['user'] = UserSerializer(user).data
+                except: 
+                    news_serializer['user'] = None
+        context = {'news': news_serializer_array, }
+        return render(request,'Blog/listNews.html', context)
+
+class ListMyNews(View):
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        news = News.objects.filter(user=user)
+        news_serializer_array = NewsSerializer(news, many=True).data
+        for news_serializer in news_serializer_array: 
+            if 'user' in news_serializer and news_serializer['user'] != None: 
+                try: 
+                    user = User.objects.get(pk=news_serializer['user'])
+                    news_serializer['user'] = UserSerializer(user).data
+                except: 
+                    news_serializer['user'] = None
+        context = {'news': news_serializer_array, }
+        return render(request,'Blog/listMyNews.html', context)
+
+class NewsUpdate(View):
+    def get(self, request, pk, *args, **kwargs):
+        news = News.objects.get(id=pk)
+        if news.user != request.user: 
+            return render(request, 'Blog/notPermission.html')
+        formulario = NewsModel2Form(instance=news)
+        context = {'news': formulario, }
+        return render(request, 'Blog/updateNews.html', context)
+
+    def post(self, request, pk, *args, **kwargs):
+        news = get_object_or_404(News, id=pk)
+        formulario = NewsModel2Form(request.POST, instance=news)
+        if formulario.is_valid():
+            news = formulario.save()
+            news.save()
+            return HttpResponseRedirect(reverse_lazy('home'))
+        else:
+            context = {'news': formulario, }
+            return render(request, 'Blog/updateNews.html', context)
+
 
 def index(request):
     return render(request, 'Blog/index.html')

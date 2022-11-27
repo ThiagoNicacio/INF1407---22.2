@@ -1,0 +1,24 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'myapp/css/style.css' %}">
+</head>
+<div class="row" style="justify-content: center">
+    <p>Usuário logado: {% firstof user.name user.email %}</p>
+</div>
+<div class="row" style="justify-content: center">
+    <a href="{% url 'home' %}" class="header-option">
+        Homepage
+    </a> |
+    <a href="{% url 'myNews' %}" class="header-option">
+        Minhas notícias
+    </a> |
+    <a href="{% url 'home' %}" class="header-option">
+        Criar notícia
+    </a> |
+    <a href="{% url 'logout' %}" class="header-option">
+        Sair da conta
+    </a>
+</div>
+<hr>

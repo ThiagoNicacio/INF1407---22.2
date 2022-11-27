@@ -23,5 +23,7 @@ urlpatternsSite = [
     path('register/', register_new_account, name='register'),
     path('login/', LoginView.as_view(template_name='Blog/login.html', next_page='home'), name='login'),
     path('logout/', LogoutView.as_view(next_page=reverse_lazy('index')), name='logout'),
-    path('home/', ListAllNews.as_view(), name='home')
+    path('home/', ListAllNews.as_view(), name='home'), 
+    path('myNews/', ListMyNews.as_view(), name='myNews'),
+    path('updateNews/<int:pk>', NewsUpdate.as_view(), name='updateNews'),
 ]
