@@ -8,7 +8,7 @@
 
 Para esse segundo trabalho foi desenvolvido um blog de notícias onde cada usuário pode criar, editar e deletar suas notícias. Além de conseguir visualizar todas as notícias que já foram publicadas por outros usuários.
 
-Realizamos a publicação do nosso site na plataforma heroku, e você pode acessar pelo seguinte link: https://shrouded-hamlet-78345.herokuapp.com/
+Realizamos a publicação do nosso site na plataforma heroku, e você pode acessar pelo seguinte link: https://still-refuge-01907.herokuapp.com/
 
 # Como utilizar o site
 

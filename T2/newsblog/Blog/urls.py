@@ -19,7 +19,7 @@ urlpatternsCore = [
 ]
 
 urlpatternsSite = [
-    path('', index, name='index'),
+    path('', ListAllNews.as_view(), name='index'),
     path('register/', register_new_account, name='register'),
     path('login/', LoginView.as_view(template_name='Blog/login.html', next_page='home'), name='login'),
     path('logout/', LogoutView.as_view(next_page=reverse_lazy('index')), name='logout'),
